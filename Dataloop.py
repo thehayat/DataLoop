@@ -1,4 +1,5 @@
 import os
+import traceback
 from datetime import datetime
 
 import dtlpy as dl
@@ -123,21 +124,24 @@ class DataloopAI:
 
 if __name__ == "__main__":
     files_dir = "flower"
-    dlp = DataloopAI()
-    existing_projects = dlp.list_project()
-    print(f"Existing projects: ")
-    print(existing_projects)
-    project = dlp.project_getOrCreate('myflower')
+    try:
+        dlp = DataloopAI()
+        existing_projects = dlp.list_project()
+        print(f"Existing projects: ")
+        print(existing_projects)
+        project = dlp.project_getOrCreate('myflower')
+        existing_datasets = dlp.list_dataset(project=project)
+        print(f"Existing datasets: ")
+        print(existing_datasets)
+        dataset = dlp.dataset_getOrCreate('flower')
 
-    existing_datasets = dlp.list_dataset(project=project)
-    print(f"Existing datasets: ")
-    print(existing_datasets)
-    dataset = dlp.dataset_getOrCreate('flower')
+        dlp.add_label(label_name="flower", attributes=['rose'], color=(34, 6, 231))
+        dlp.add_label(label_name="color", attributes=['red'], color=(34, 7, 231))
+        dlp.add_label(label_name="count", attributes=['single', 'many'], color=(34, 8, 231))
 
-    dlp.add_label(label_name="flower", attributes=['rose'], color=(34, 6, 231))
-    dlp.add_label(label_name="color", attributes=['red'], color=(34, 7, 231))
-    dlp.add_label(label_name="count", attributes=['single', 'many'], color=(34, 8, 231))
+        dlp.uploadFolder(files_dir)
+        # dlp.add_metadata({"collected": datetime.now()})
+    except Exception as e:
+        traceback.print_exc()
 
-    dlp.uploadFolder(files_dir)
 
-    # dlp.add_metadata({"collected": datetime.now()})

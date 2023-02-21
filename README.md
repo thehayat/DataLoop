@@ -1,4 +1,5 @@
 ## DataLoop Assignment
+[Github Link](https://github.com/thehayat/DataLoop)
 
 ### Part 1 (UI and preparation):
 1. Create a demo account on the Dataloop platform - https://console.dataloop.ai/
@@ -27,10 +28,24 @@ directory)
 
 
 ### About Script
+The Script aims to explore the potential of the dataloop SDK.
+Following of the functionality can be used.
+- Login to Dataloop.ai 
+- Get or create the project. 
+- Get or create the dataset.
+- Upload the single images or the directory.
+- Add label and attributes.
+- ToDo
+  - Add metadata to the items
+  - Add classification 
 
 
 
 ### Usage
+```python
+dlp = DataloopAI() #Initialize the class.
+existing_projects = dlp.list_project() # List projects
+```
 
 
 ### References
